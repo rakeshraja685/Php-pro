@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Delay Program Execution</title>
+</head>
+<body style="text-align: center;">
+ <h2>PHP Delay Execution using usleep()</h2>
+ <form method="POST">
+   Enter number of seconds to delay:
+   <input type="number" name="seconds" min="1"
+   value ="<?php if(isset($_POST['seconds'])) {echo $_POST['seconds']; } ?>"
+   required>
+   <br><br>
+   <input type="submit" value="Start Delay">
+ </form>
+ <?php
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   $seconds = intval($_POST['seconds']);
+   echo "<p>Delaying for $seconds second(s)...</p>";
+   flush(); // Sends output before sleep
+
+   // usleep takes microseconds, so multiply by 1 million
+   usleep($seconds * 1000000);
+
+   echo "<p>Delay completed!</p>";
+ }
+ ?>
+</body>
+</html>
